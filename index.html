@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe4e1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+
+        h1 { color: #d63384; font-size: 1.5rem; line-height: 1.4; }
+        
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 10px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #noBtn { background-color: #adb5bd; color: white; position: relative; }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <div id="part1">
+            <h1>Hi love, sorry sa nasabi and nagawa ko nung monday. Pasensya kana if nagalit ako and sinisi kita sa madaming tao. Nainis lang ako kasi sinisi mo sakin un kahit na alam kong pinatago ko sayo ung mga papel. Pasensya kana dahil nagalit ako sana mapatawad moko.</h1>
+            <p>Mapapatawad mo ba ako?</p>
+            <div class="buttons">
+                <button id="yesBtn" onclick="nextPart(2)">Yes</button>
+                <button id="noBtn" onmouseover="moveButton(this)">No</button>
+            </div>
+        </div>
+
+        <div id="part2" class="hidden">
+            <h1>Ay oo nga pala may tanong pako...</h1>
+            <div class="buttons">
+                <button id="yesBtn" onclick="nextPart(3)">Ano?</button>
+            </div>
+        </div>
+
+        <div id="part3" class="hidden">
+            <h1>Will you be my Valentine po ba?</h1>
+            <div class="buttons">
+                <button id="yesBtn" onclick="nextPart(4)">Yes</button>
+                <button id="noBtn2" onclick="nextPart(4)">No</button>
+            </div>
+        </div>
+
+        <div id="part4" class="hidden">
+            <h1>Yayy! I love youu poo, mwaaaaa! <br><br> Pleaseeee? :(</h1>
+            <div class="buttons">
+                <button id="yesBtn" onclick="alert('I love you more! ❤️')">Yes</button>
+                <button id="noBtnFinal" onmouseover="moveButton(this)">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function nextPart(partNumber) {
+            // Hide all parts
+            document.getElementById('part1').classList.add('hidden');
+            document.getElementById('part2').classList.add('hidden');
+            document.getElementById('part3').classList.add('hidden');
+            document.getElementById('part4').classList.add('hidden');
+
+            // Show current part
+            document.getElementById('part' + partNumber).classList.remove('hidden');
+        }
+
+        function moveButton(btn) {
+            // Logic to make the button jump away from cursor
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            
+            btn.style.position = "fixed";
+            btn.style.left = x + "px";
+            btn.style.top = y + "px";
+        }
+    </script>
+</body>
+</html>
