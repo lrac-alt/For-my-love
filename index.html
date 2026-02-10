@@ -22,85 +22,90 @@
             padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-width: 400px;
+            max-width: 450px;
             width: 90%;
             position: relative;
         }
 
-        h1 { color: #d63384; font-size: 1.5rem; line-height: 1.4; }
+        h1 { color: #d63384; font-size: 1.4rem; line-height: 1.4; }
+        p { color: #555; font-size: 1.1rem; }
         
         .buttons {
             margin-top: 20px;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         button {
-            padding: 10px 25px;
+            padding: 12px 28px;
             font-size: 1rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: background 0.3s;
         }
 
-        #yesBtn { background-color: #ff4d6d; color: white; }
-        #noBtn { background-color: #adb5bd; color: white; position: relative; }
+        .yes-style { background-color: #ff4d6d; color: white; }
+        .no-style { background-color: #adb5bd; color: white; position: relative; }
 
         .hidden { display: none; }
     </style>
 </head>
 <body>
 
-    <div class="container" id="mainContainer">
+    <div class="container">
         <div id="part1">
             <h1>Hi love, sorry sa nasabi and nagawa ko nung monday. Pasensya kana if nagalit ako and sinisi kita sa madaming tao. Nainis lang ako kasi sinisi mo sakin un kahit na alam kong pinatago ko sayo ung mga papel. Pasensya kana dahil nagalit ako sana mapatawad moko.</h1>
             <p>Mapapatawad mo ba ako?</p>
             <div class="buttons">
-                <button id="yesBtn" onclick="nextPart(2)">Yes</button>
-                <button id="noBtn" onmouseover="moveButton(this)">No</button>
+                <button class="yes-style" onclick="nextPart(2)">Yes</button>
+                <button id="noBtn1" class="no-style" onmouseover="moveButton(this)">No</button>
             </div>
         </div>
 
         <div id="part2" class="hidden">
             <h1>Ay oo nga pala may tanong pako...</h1>
             <div class="buttons">
-                <button id="yesBtn" onclick="nextPart(3)">Ano?</button>
+                <button class="yes-style" onclick="nextPart(3)">Ano?</button>
             </div>
         </div>
 
         <div id="part3" class="hidden">
             <h1>Will you be my Valentine po ba?</h1>
             <div class="buttons">
-                <button id="yesBtn" onclick="nextPart(4)">Yes</button>
-                <button id="noBtn2" onclick="nextPart(4)">No</button>
+                <button class="yes-style" onclick="nextPart(5)">Yes</button>
+                <button class="no-style" onclick="nextPart(4)">No</button>
             </div>
         </div>
 
         <div id="part4" class="hidden">
-            <h1>Yayy! I love youu poo, mwaaaaa! <br><br> Pleaseeee? :(</h1>
+            <h1>Pleaseeee? :(</h1>
             <div class="buttons">
-                <button id="yesBtn" onclick="alert('I love you more! ❤️')">Yes</button>
-                <button id="noBtnFinal" onmouseover="moveButton(this)">No</button>
+                <button class="yes-style" onclick="nextPart(5)">Yes</button>
+                <button id="noBtnFinal" class="no-style" onmouseover="moveButton(this)">No</button>
             </div>
+        </div>
+
+        <div id="part5" class="hidden">
+            <h1>Yayy! I love youu poo, mwaaaaa! <br> Sorry ulit! ❤️</h1>
+            <p>Thank you po love, sorry for being mean to you.</p>
         </div>
     </div>
 
     <script>
-        function nextPart(partNumber) {
-            // Hide all parts
-            document.getElementById('part1').classList.add('hidden');
-            document.getElementById('part2').classList.add('hidden');
-            document.getElementById('part3').classList.add('hidden');
-            document.getElementById('part4').classList.add('hidden');
-
-            // Show current part
-            document.getElementById('part' + partNumber).classList.remove('hidden');
+        function nextPart(num) {
+            // Hide all potential parts
+            for(let i=1; i<=5; i++) {
+                document.getElementById('part' + i).classList.add('hidden');
+            }
+            // Show the target part
+            document.getElementById('part' + num).classList.remove('hidden');
         }
 
         function moveButton(btn) {
-            // Logic to make the button jump away from cursor
+            // Randomly move the button within the viewport
             const x = Math.random() * (window.innerWidth - btn.offsetWidth);
             const y = Math.random() * (window.innerHeight - btn.offsetHeight);
             
